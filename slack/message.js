@@ -20,6 +20,10 @@ export class SlackMessage {
 		}
 	}
 
+	toString()  {
+		return JSON.stringify(this);
+	}
+
 	toJSON() {
 		return { blocks: this.#blocks };
 	}
@@ -80,7 +84,7 @@ export class SlackMessage {
 				Accept: 'text/plain',
 				'Content-Type': 'application/json',
 			}),
-			body: JSON.stringify(this),
+			body: this,
 			signal,
 		});
 
