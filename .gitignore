@@ -1,6 +1,8 @@
-*.cjs
+.env
+*.bak
 *.min.*
 *.map
+*.cjs
 # Logs
 logs
 *.log
