@@ -14,3 +14,8 @@ importmap.yaml
 *.log
 *.min.*
 *.map
+.env
+*.bak
+api/
+.netlify/
+netlify.toml

@@ -1,6 +1,10 @@
-*.cjs
+.env
+*.bak
 *.min.*
 *.map
+*.cjs
+api/
+.netlify/
 # Logs
 logs
 *.log
