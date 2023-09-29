@@ -1,0 +1,7 @@
+[dev]
+  # base = "./"
+  # publish = "./"
+  # command = "npm run build"
+  # targetPort = 4000
+  functions="api"
+

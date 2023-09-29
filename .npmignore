@@ -16,3 +16,6 @@ importmap.yaml
 *.map
 .env
 *.bak
+api/
+.netlify/
+netlify.toml
