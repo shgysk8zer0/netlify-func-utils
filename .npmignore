@@ -15,6 +15,7 @@ importmap.yaml
 *.min.*
 *.map
 .env
+.gitkeep
 *.bak
 api/
 .netlify/

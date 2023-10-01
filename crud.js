@@ -1,5 +1,5 @@
-import { INTERNAL_SERVER_ERROR, NOT_IMPLEMENTED, NO_CONTENT } from '@shgysk8zer0/http/status';
-import { HTTPError } from '@shgysk8zer0/http/error';
+import { INTERNAL_SERVER_ERROR, NOT_IMPLEMENTED, NO_CONTENT } from '@shgysk8zer0/consts/status.js';
+import { HTTPError } from '@shgysk8zer0/http/error.js';
 import { NetlifyRequest } from './request.js';
 
 export function createOptionsHandler(handlers, { cors = true }) {

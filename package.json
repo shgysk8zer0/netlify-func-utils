@@ -1,24 +1,26 @@
 {
   "name": "@shgysk8zer0/netlify-func-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": " A collection of helpful functions for building Netlify Functions",
   "keywords": [
     "netlify",
     "netlify-functions"
   ],
   "type": "module",
-  "main": "index.cjs",
+  "main": "./cjs/index.cjs",
   "module": "index.js",
   "exports": {
     ".": {
       "import": "./index.js",
-      "require": "./index.cjs"
+      "require": "./cjs/index.cjs"
     },
     "./*.js": {
-      "import": "./*"
+      "import": "./*.js",
+      "require": "./cjs/*.cjs"
     },
     "./*": {
-      "import": "./*.js"
+      "import": "./*.js",
+      "require": "./cjs/*.cjs"
     }
   },
   "engines": {
@@ -33,8 +35,7 @@
     "lint:js": "eslint .",
     "fix:js": "eslint . --fix",
     "build": "npm run build:js",
-    "build:js": "rollup -c rollup.config.js",
-    "build:slack": "rollup -c rollup.slack.config.js",
+    "build:js": "rm -f ./cjs/*.cjs && rollup -c rollup.config.js",
     "create:lock": "npm i --package-lock-only --ignore-scripts --no-audit --no-fund",
     "version:bump": "npm run version:bump:patch",
     "netlify:functions": "netlify functions:serve",
@@ -67,8 +68,8 @@
     "@shgysk8zer0/js-utils": "^1.0.1"
   },
   "dependencies": {
-    "@shgysk8zer0/consts": "^1.0.6",
-    "@shgysk8zer0/http": "^1.0.1"
+    "@shgysk8zer0/consts": "^1.0.7",
+    "@shgysk8zer0/http": "^1.0.5"
   },
   "peerDependencies": {
     "netlify-cli": "^16.4.2"
