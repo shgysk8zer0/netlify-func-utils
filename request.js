@@ -1,4 +1,4 @@
-import { JSON, FORM_URL_ENCODED, FORM_MULTIPART } from '@shgysk8zer0/consts/mimes.js';
+import { JSON as JSON_MIME, JSON_LD, WEB_APP_MANIFEST, FORM_URL_ENCODED, FORM_MULTIPART } from '@shgysk8zer0/consts/mimes.js';
 
 export class NetlifyRequest extends Request {
 	#cookies;
@@ -38,7 +38,7 @@ export class NetlifyRequest extends Request {
 		super(url, {
 			method: httpMethod,
 			mode: headers['sec-fetch-mode'],
-			headers: new Headers(headers),
+			headers: new Headers({ ...headers, referer }),
 			referrer: referer, // Deal with typo in HTTP spec
 			body: (
 				typeof body === 'string'
@@ -59,19 +59,26 @@ export class NetlifyRequest extends Request {
 
 	get contentType() {
 		if (this.headers.has('Content-Type')) {
-			return this.headers.get('Content-Type').split(';')[0].trim();
+			return this.headers.get('Content-Type').split(';')[0].trim().toLowerCase();
 		} else {
 			return '';
 		}
 	}
 
 	get isJSON() {
-		return this.headers.get('Content-Type').startsWith(JSON);
+		return [JSON_MIME, JSON_LD, WEB_APP_MANIFEST, 'text/json'].includes(this.contentType);
 	}
 
 	get  isFormData() {
-		const contentType = this.headers.get('Content-Type');
-		return [FORM_MULTIPART, FORM_URL_ENCODED].some(type => contentType.startsWith(type));
+		return [FORM_MULTIPART, FORM_URL_ENCODED].includes(this.contentType);
+	}
+
+	get geo() {
+		if (this.headers.has('X-NF-Geo')) {
+			return JSON.parse(atob(this.headers.get('X-NF-Geo')));
+		} else {
+			return {};
+		}
 	}
 
 	get cookies() {
