@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.0.3] - 2023-10-10
+
+### Changed
+- `NetlifyRequest` now keeps the `Referer` header
+
+### Fixed
+- `NetlifyRequest` now better detects form data and JSON
+- No longer have `netlify-cli` as a peer-dependency (it's a dev-dependency)
+
 ## [v1.0.2] - 2023-10-01
 
 ### Added

@@ -1,6 +1,6 @@
 {
   "name": "@shgysk8zer0/netlify-func-utils",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": " A collection of helpful functions for building Netlify Functions",
   "keywords": [
     "netlify",
@@ -64,14 +64,13 @@
   },
   "homepage": "https://github.com/shgysk8zer0/netlify-func-utils#readme",
   "devDependencies": {
+    "netlify-cli": "^16.4.2",
     "@rollup/plugin-node-resolve": "^15.2.1",
     "@shgysk8zer0/js-utils": "^1.0.1"
   },
   "dependencies": {
     "@shgysk8zer0/consts": "^1.0.7",
     "@shgysk8zer0/http": "^1.0.5"
-  },
-  "peerDependencies": {
-    "netlify-cli": "^16.4.2"
   }
 }
+
