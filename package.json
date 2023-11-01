@@ -64,7 +64,7 @@
   },
   "homepage": "https://github.com/shgysk8zer0/netlify-func-utils#readme",
   "devDependencies": {
-    "netlify-cli": "^16.4.2",
+    "netlify-cli": "^17.0.0",
     "@rollup/plugin-node-resolve": "^15.2.1",
     "@shgysk8zer0/js-utils": "^1.0.1"
   },
