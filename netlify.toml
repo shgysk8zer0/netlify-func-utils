@@ -1,7 +1,10 @@
 [dev]
-  # base = "./"
-  # publish = "./"
-  # command = "npm run build"
-  # targetPort = 4000
+  base = "./"
+  publish = "./"
+  command = "npm run build"
+  targetPort = 9999
   functions="api"
 
+[functions]
+  external_node_modules = []
+  node_bundler = "esbuild"

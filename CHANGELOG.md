@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.1.0] - 2024-05-12
+
+### Added
+- Add `RequestCookies` class with static method to parse from headers
+- Add `api/test` for testing
+
+### Fixed
+- Fix encoding issue of binary data in requests
+- Fix invalid `Options` instead of `Allow` HTTP headers in response
+- Improve handling of CORS requests
+
 ## [v1.0.3] - 2023-10-10
 
 ### Changed
