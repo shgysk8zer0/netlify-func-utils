@@ -1,5 +1,5 @@
 import { JSON as JSON_MIME, JSON_LD, WEB_APP_MANIFEST, FORM_URL_ENCODED, FORM_MULTIPART } from '@shgysk8zer0/consts/mimes.js';
-
+import { RequestCookies } from './requestcookies';
 export class NetlifyRequest extends Request {
 	#cookies;
 
@@ -42,19 +42,14 @@ export class NetlifyRequest extends Request {
 			referrer: referer, // Deal with typo in HTTP spec
 			body: (
 				typeof body === 'string'
-				&& ! ['GET', 'DELETE', 'HEAD', 'OPTIONS'].includes(httpMethod)
+				&& !['GET', 'DELETE', 'HEAD', 'OPTIONS'].includes(httpMethod)
 			)
-				? isBase64Encoded ? atob(body) : body
+				? isBase64Encoded ? Buffer.from(body, 'base64').buffer : body
 				: undefined,
 		});
 
 		// Parse and store cookies in a private Map
-		if (this.headers.has('Cookie')) {
-			this.#cookies = new Map(this.headers.get('Cookie').split(';').map(c => c.split('=').map(s => decodeURIComponent(s.trim()))));
-			this.headers.delete('Cookie');
-		} else {
-			this.#cookies = new Map();
-		}
+		this.#cookies = RequestCookies.fromRequest(this);
 	}
 
 	get contentType() {
@@ -69,7 +64,7 @@ export class NetlifyRequest extends Request {
 		return [JSON_MIME, JSON_LD, WEB_APP_MANIFEST, 'text/json'].includes(this.contentType);
 	}
 
-	get  isFormData() {
+	get isFormData() {
 		return [FORM_MULTIPART, FORM_URL_ENCODED].includes(this.contentType);
 	}
 
@@ -87,5 +82,12 @@ export class NetlifyRequest extends Request {
 
 	get searchParams() {
 		return new URL(this.url).searchParams;
+	}
+
+	accepts(...types) {
+		if (this.headers.has('Accept')) {
+			const accept = this.headers.get('Accept').split(',').map(type => type.split(';')[0].trim().toLowerCase());
+			return types.some(type => accept.includes(type));
+		}
 	}
 }
