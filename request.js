@@ -1,5 +1,6 @@
 import { JSON as JSON_MIME, JSON_LD, WEB_APP_MANIFEST, FORM_URL_ENCODED, FORM_MULTIPART } from '@shgysk8zer0/consts/mimes.js';
 import { RequestCookies } from './requestcookies';
+
 export class NetlifyRequest extends Request {
 	#cookies;
 
@@ -43,13 +44,19 @@ export class NetlifyRequest extends Request {
 			body: (
 				typeof body === 'string'
 				&& !['GET', 'DELETE', 'HEAD', 'OPTIONS'].includes(httpMethod)
-			)
-				? isBase64Encoded ? Buffer.from(body, 'base64').buffer : body
-				: undefined,
+			) ? Buffer.from(body, isBase64Encoded ? 'base64' : 'utf-8') : undefined,
 		});
 
 		// Parse and store cookies in a private Map
 		this.#cookies = RequestCookies.fromRequest(this);
+	}
+
+	get accept() {
+		if (this.headers.has('Accept')) {
+			return this.headers.get('Accept').split(',').map(type => type.split(';')[0].trim().toLowerCase());
+		} else {
+			return ['*/*'];
+		}
 	}
 
 	get contentType() {
@@ -86,8 +93,10 @@ export class NetlifyRequest extends Request {
 
 	accepts(...types) {
 		if (this.headers.has('Accept')) {
-			const accept = this.headers.get('Accept').split(',').map(type => type.split(';')[0].trim().toLowerCase());
-			return types.some(type => accept.includes(type));
+			const accept = this.accept;
+			return accept.includes('*/*') || types.some(type => accept.includes(type));
+		} else {
+			return true;
 		}
 	}
 }

@@ -10,8 +10,8 @@ import { NetlifyRequest } from './request.js';
  * @param {boolean} opts.cors
  * @returns Response
  */
-export function createOptionsHandler(methods, { req, cors = true }) {
-	return async () => {
+export function createOptionsHandler(methods, { cors = true }) {
+	return async (req) => {
 		if (
 			req.headers.has('Access-Control-Request-Method')
 			&& ! methods.includes(req.headers.get('Access-Control-Request-Method').toLowerCase())
