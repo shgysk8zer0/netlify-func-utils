@@ -67,7 +67,7 @@
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@shgysk8zer0/eslint-config": "^1.0.1",
     "@shgysk8zer0/js-utils": "^1.0.1",
-    "netlify-cli": "^20.0.0"
+    "netlify-cli": "^21.2.0"
   },
   "dependencies": {
     "@shgysk8zer0/consts": "^1.0.7",
