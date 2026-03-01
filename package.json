@@ -1,6 +1,6 @@
 {
   "name": "@shgysk8zer0/netlify-func-utils",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": " A collection of helpful functions for building Netlify Functions",
   "keywords": [
     "netlify",
@@ -67,7 +67,8 @@
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@shgysk8zer0/eslint-config": "^1.0.1",
     "@shgysk8zer0/js-utils": "^1.0.1",
-    "netlify-cli": "^24.0.1"
+    "netlify-cli": "^24.0.1",
+    "rollup": "^4.59.0"
   },
   "dependencies": {
     "@shgysk8zer0/consts": "^1.0.7",
